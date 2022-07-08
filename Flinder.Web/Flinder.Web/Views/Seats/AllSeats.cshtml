@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Flinder.Web.Data.Seat>
+
+@{
+    ViewData["Title"] = "AllSeats";
+}
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                Class
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Row)
+            </th>
+            <th>
+                Column
+            </th>
+            <th>
+                Book/Unbook
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Seat_Class)
+            </td>
+            @if (item.Is_Booked)
+            {
+                <td style="color: red;">
+                    Booked
+                </td>
+            }
+            else
+            {
+                <td>
+                    Not Booked
+                </td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.Row)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Col)
+            </td>
+            
+            @if (item.Is_Booked)
+            {
+            <td>
+                <a asp-action="Unbook" asp-route-id="@item.Id" width="10%" class="btn btn-outline-dark">Unbook</a>
+            </td>
+            }
+            else
+            {
+            <td>
+                <a asp-action="Book" asp-route-id="@item.Id" width="10%" class="btn btn-outline-dark">Book</a>
+            </td>
+            }
+        </tr>
+}
+    </tbody>
+</table>

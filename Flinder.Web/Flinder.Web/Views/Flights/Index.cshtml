@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Flinder.Web.Data.Flight>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2 class="text-center">Flights <a asp-action="Create" class="btn btn-outline-dark">+</a></h2>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                Airline
+            </th>
+            <th>
+                From
+            </th>
+            <th>
+                To
+            </th>
+            <th>
+                Take Off Time
+            </th>
+            <th>
+                Landing Time
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var flight in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => flight.Airline_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => flight.Origin_Airport_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => flight.Destination_Airport_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => flight.TakeOff_Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => flight.Landing_Time)
+            </td>
+            <td>
+                <a asp-controller="Seats" asp-action="AllSeats" asp-route-flightId="@flight.Id" class="btn btn-outline-dark">AllSeats</a>
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@flight.Id" class="btn btn-outline-danger">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

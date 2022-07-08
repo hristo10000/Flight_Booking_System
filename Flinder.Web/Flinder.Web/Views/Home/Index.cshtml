@@ -1,0 +1,51 @@
+﻿@model SearchFlightModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center font-weight-normal">
+    <h1 class="font-weight-bold ">
+        Flinder
+    </h1>
+    <h2 class="font-italic">
+        The best flight finder
+    </h2>
+</div>
+<br />
+<h3>Find your flight</h3>
+
+<div>
+    <form asp-action="SearchFlight" class="SearchFlightForm">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="OriginAirportName" class="control-label">From</label>
+            <select asp-for="OriginAirportName" class="form-control">
+                <option value="" disabled selected>Choose Airport</option>
+                    @foreach(var airport in Model.AirportNames)
+                    {
+            <option value="@airport">@airport</option>
+                    }
+            </select>
+            <span asp-validation-for="OriginAirportName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="DestinationAirportName" class="control-label">To</label>
+            <select asp-for="DestinationAirportName" class="form-control">
+                <option value="" disabled selected>Choose Airport</option>
+                @foreach (var airport in Model.AirportNames)
+                {
+            <option value="@airport">@airport</option>
+                }
+            </select>
+            <span asp-validation-for="DestinationAirportName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="TakeOffTime" class="control-label">Depart</label>
+            <input asp-for="TakeOffTime" class="form-control" value="" min="2022-07-09T00:00" max="2023-12-31T12:00" />
+            <span asp-validation-for="TakeOffTime" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Search Flights" class="btn btn-outline-dark SearchFlightsButton"/>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,69 @@
+﻿@model FlightCreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Add Flight</h1>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" >
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Airline_Name" class="control-label">Airline</label>
+                <select asp-for="Airline_Name" class="form-control">
+                    <option value="" disabled selected>Choose Airline</option>
+                    @foreach (var airlineName in Model.AirlineNames)
+                    {
+                        <option value="@airlineName">@airlineName</option>
+                    }
+                </select>
+                <span asp-validation-for="Airline_Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Origin_Airport_Name" class="control-label">From</label>
+                <select asp-for="Origin_Airport_Name" class="form-control">
+                    <option value="" disabled selected>Choose Airport</option>
+                    @foreach (var airportId in Model.AirportIds)
+                    {
+                        <option>@airportId</option>
+                    }
+                </select>
+                <span asp-validation-for="Origin_Airport_Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Destination_Airport_Name" class="control-label">To</label>
+                <select asp-for="Destination_Airport_Name" class="form-control" on>
+                    <option value="" disabled selected>Choose Airport</option>
+                    @foreach (var airportId in Model.AirportIds)
+                    {
+                        <option>@airportId</option>
+                    }
+                </select>
+                <span asp-validation-for="Destination_Airport_Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TakeOff_Time" class="control-label">Take Off Time</label>
+                <input asp-for="TakeOff_Time" class="form-control" value="" min="2022-07-08T00:00" max="2023-12-31T12:00" />
+                <span asp-validation-for="TakeOff_Time" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <label asp-for="Landing_Time" class="control-label">Landing Time</label>
+                <input asp-for="Landing_Time" class="form-control" value="" min="2022-07-08T00:00" max="2023-12-31T23:59" />
+                <span asp-validation-for="Landing_Time" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Classes" class="control-label">Classes</label>
+                <button type="button" id="add-new-flightClass" class="btn btn-outline-dark">+</button>
+                <div id="flightClass-container" style="display:flex; flex-direction:row;"></div>
+            </div>
+            <div class="form-group">
+                <input onclick="flightClassesCount = 0;" type="submit" value="Create" class="btn btn-dark" />
+            </div>
+        </form>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

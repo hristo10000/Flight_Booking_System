@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Flinder.Web.Data.Flight>
+
+@{
+    ViewData["Title"] = "SearchFlight";
+}
+@if (Model.ToArray().Length > 0)
+{
+    <h1>These are the flights for you</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Airline
+                </th>
+                <th>
+                    From
+                </th>
+                <th>
+                    To
+                </th>
+                <th>
+                    Take Off Time
+                </th>
+                <th>
+                    Landing Time
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Airline_Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Origin_Airport_Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Destination_Airport_Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TakeOff_Time)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Landing_Time)
+                    </td>
+                    <td>
+                        <a asp-controller="Seats" asp-action="AllSeats" asp-route-flightId="@item.Id" class="btn btn-outline-info">All Seats</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h1>Sorry! We couldn't find what you were looking for :(</h1>
+}

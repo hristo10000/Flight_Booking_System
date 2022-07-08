@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Flinder.Web.Data.Airport>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2 class="text-center">Airports <a asp-action="Create" class="btn btn-outline-dark">+</a></h2>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                Code
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Adress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
+            <th style="text-align:center;">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var airport in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => airport.Airport_Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => airport.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => airport.Adress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => airport.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => airport.Country)
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@airport.Airport_Id" class="btn btn-outline-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
